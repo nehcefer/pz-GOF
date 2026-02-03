@@ -13,7 +13,7 @@
 * Реалізувати:
   * **2 породжувальні патерни** (наприклад: Factory Method, Abstract Factory, Builder, Singleton, Prototype)
   * **2 структурні патерни** (наприклад: Adapter, Facade, Decorator, Composite, Proxy, Bridge)
-  * **1 поведінковий патерн** (наприклад: Strategy, Observer, Command, Iterator, Chain of Responsibility)
+  * **2 поведінковий патерн** (наприклад: Strategy, Observer, Command, Iterator, Chain of Responsibility)
 * Продемонструвати роботу кожного патерна (консольний приклад або простий сценарій)
 * Пояснити, яку проблему вирішує кожен патерн
 * Порівняти, як патерни покращують архітектуру коду порівняно з «анти-прикладами»
