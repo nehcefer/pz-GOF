@@ -1,49 +1,34 @@
-class Pizza {
-  size: string = '';
-  cheese: boolean = false;
-  pepperoni: boolean = false;
-  mushrooms: boolean = false;
+import { PizzaBuilder }  from './PizzaBuilder';
+import { BurgerBuilder } from './BurgerBuilder';
 
-  show(): string {
-    return `🍕 Піца: ${this.size}, сир: ${this.cheese}, пепероні: ${this.pepperoni}, гриби: ${this.mushrooms}`;
-  }
-}
+console.log('\n=== Builder Pattern ===\n');
 
-class PizzaBuilder {
-  private pizza: Pizza = new Pizza();
+const pizza1 = new PizzaBuilder()
+  .setSize('велика')
+  .addCheese()
+  .addPepperoni()
+  .addBacon()
+  .build();
+console.log(pizza1.show());
 
-  setSize(size: string): this {
-    this.pizza.size = size;
-    return this;
-  }
+const pizza2 = new PizzaBuilder()
+  .setSize('маленька')
+  .addCheese()
+  .addMushrooms()
+  .build();
+console.log(pizza2.show());
 
-  addCheese(): this {
-    this.pizza.cheese = true;
-    return this;
-  }
+const burger1 = new BurgerBuilder()
+  .setSize('подвійний')
+  .addCheese()
+  .addBacon()
+  .addTomato()
+  .build();
+console.log(burger1.show());
 
-  addPepperoni(): this {
-    this.pizza.pepperoni = true;
-    return this;
-  }
-
-  addMushrooms(): this {
-    this.pizza.mushrooms = true;
-    return this;
-  }
-
-  build(): Pizza {
-    return this.pizza;
-  }
-}
-
-// Демо
-export function demoBuilder() {
-  console.log('\n=== Builder ===');
-  const pizza = new PizzaBuilder()
-    .setSize('велика')
-    .addCheese()
-    .addPepperoni()
-    .build();
-  console.log(pizza.show());
-}
+const burger2 = new BurgerBuilder()
+  .setSize('класичний')
+  .addLettuce()
+  .addTomato()
+  .build();
+console.log(burger2.show());
