@@ -1,36 +1,10 @@
-// Продукт
-interface Coffee {
-  prepare(): string;
-}
+import { VehicleFactory } from './VehicleFactory';
 
-class Espresso implements Coffee {
-  prepare(): string {
-    return '☕ Еспресо готовий!';
-  }
-}
+console.log('\n=== Factory Method Pattern: Транспорт ===\n');
 
-class Latte implements Coffee {
-  prepare(): string {
-    return '☕ Лате з молоком готовий!';
-  }
-}
+const types = ['car', 'motorcycle', 'truck', 'bicycle'];
 
-// Фабрика
-class CoffeeFactory {
-  static makeCoffee(type: string): Coffee {
-    if (type === 'espresso') {
-      return new Espresso();
-    } else {
-      return new Latte();
-    }
-  }
-}
-
-// Демо
-export function demoFactoryMethod() {
-  console.log('\n=== Factory Method ===');
-  const coffee1 = CoffeeFactory.makeCoffee('espresso');
-  const coffee2 = CoffeeFactory.makeCoffee('latte');
-  console.log(coffee1.prepare());
-  console.log(coffee2.prepare());
-}
+types.forEach(type => {
+  const vehicle = VehicleFactory.create(type);
+  console.log(vehicle.describe());
+});
