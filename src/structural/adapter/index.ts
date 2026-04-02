@@ -1,32 +1,16 @@
-// Старий зарядний пристрій
-class OldCharger {
-  chargeWithMicroUSB(): string {
-    return '⚡ Заряджаю через Micro-USB';
-  }
-}
+import { OldCharger }     from './OldCharger';
+import { ChargerAdapter } from './ChargerAdapter';
+import { EuropeanSocket } from './EuropeanSocket';
+import { SocketAdapter }  from './SocketAdapter';
 
-// Новий інтерфейс
-interface NewCharger {
-  chargeWithUSBC(): string;
-}
+console.log('\n=== Adapter Pattern ===\n');
 
-// Адаптер
-class ChargerAdapter implements NewCharger {
-  private oldCharger: OldCharger;
+// Старий зарядник через адаптер
+const oldCharger = new OldCharger();
+const chargerAdapter = new ChargerAdapter(oldCharger);
+console.log(chargerAdapter.chargeWithUSBC());
 
-  constructor(oldCharger: OldCharger) {
-    this.oldCharger = oldCharger;
-  }
-
-  chargeWithUSBC(): string {
-    return this.oldCharger.chargeWithMicroUSB() + ' (через адаптер USB-C)';
-  }
-}
-
-// Демо
-export function demoAdapter() {
-  console.log('\n=== Adapter ===');
-  const oldCharger = new OldCharger();
-  const adapter = new ChargerAdapter(oldCharger);
-  console.log(adapter.chargeWithUSBC());
-}
+// Єропейська розетка через адаптер
+const socket = new EuropeanSocket();
+const socketAdapter = new SocketAdapter(socket);
+console.log(socketAdapter.chargeWithUSBC());
