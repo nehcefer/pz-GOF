@@ -1,44 +1,25 @@
-// Стратегія оплати
-interface PaymentStrategy {
-  pay(amount: number): string;
-}
+import { PaymentProcessor } from './PaymentProcessor';
+import { CardPayment }      from './CardPayment';
+import { CashPayment }      from './CashPayment';
+import { AlibabaPayment }   from './AlibabaPayment';
+import { CryptoPayment }    from './CryptoPayment';
+import { PayPalPayment }    from './PayPalPayment';
 
-class CardPayment implements PaymentStrategy {
-  pay(amount: number): string {
-    return `💳 Оплачено ${amount} грн карткою`;
-  }
-}
+const processor = new PaymentProcessor();
 
-class CashPayment implements PaymentStrategy {
-  pay(amount: number): string {
-    return `💵 Оплачено ${amount} грн готівкою`;
-  }
-}
+console.log('\n=== Strategy Pattern: Оплата ===\n');
 
-// Контекст
-class PaymentProcessor {
-  private strategy?: PaymentStrategy;
+processor.setStrategy(new CardPayment());
+console.log(processor.processPayment(500));
 
-  setStrategy(strategy: PaymentStrategy): void {
-    this.strategy = strategy;
-  }
+processor.setStrategy(new CashPayment());
+console.log(processor.processPayment(200));
 
-  processPayment(amount: number): string {
-    if (!this.strategy) {
-      return '❌ Оберіть спосіб оплати';
-    }
-    return this.strategy.pay(amount);
-  }
-}
+processor.setStrategy(new AlibabaPayment());
+console.log(processor.processPayment(1500));
 
-// Демо
-export function demoStrategy() {
-  console.log('\n=== Strategy ===');
-  const processor = new PaymentProcessor();
+processor.setStrategy(new CryptoPayment());
+console.log(processor.processPayment(3000));
 
-  processor.setStrategy(new CardPayment());
-  console.log(processor.processPayment(100));
-
-  processor.setStrategy(new CashPayment());
-  console.log(processor.processPayment(100));
-}
+processor.setStrategy(new PayPalPayment());
+console.log(processor.processPayment(750));
