@@ -1,41 +1,28 @@
-// Підписник
-interface Subscriber {
-  update(videoTitle: string): void;
-}
+import { User }           from './User';
+import { YouTubeChannel } from './YouTubeChannel';
+import { TelegramChannel } from './TelegramChannel';
+import { TwitchChannel }  from './TwitchChannel';
 
-class User implements Subscriber {
-  constructor(private name: string) {}
+console.log('\n=== Observer Pattern ===\n');
 
-  update(videoTitle: string): void {
-    console.log(`🔔 ${this.name} отримав сповіщення: "${videoTitle}"`);
-  }
-}
+const ivan  = new User('Іван');
+const maria = new User('Марія');
+const oleg  = new User('Олег');
 
-// Канал
-class YouTubeChannel {
-  private subscribers: Subscriber[] = [];
+// YouTube
+const youtube = new YouTubeChannel();
+youtube.subscribe(ivan);
+youtube.subscribe(maria);
+youtube.uploadVideo('Як вивчити TypeScript за 10 хвилин');
 
-  subscribe(subscriber: Subscriber): void {
-    this.subscribers.push(subscriber);
-    console.log('✅ Новий підписник');
-  }
+// Telegram
+const telegram = new TelegramChannel();
+telegram.subscribe(maria);
+telegram.subscribe(oleg);
+telegram.postMessage('Новини про JavaScript 2026');
 
-  uploadVideo(title: string): void {
-    console.log(`\n📹 Завантажено відео: "${title}"`);
-    this.subscribers.forEach(sub => sub.update(title));
-  }
-}
-
-// Демо
-export function demoObserver() {
-  console.log('\n=== Observer ===');
-  const channel = new YouTubeChannel();
-
-  const user1 = new User('Іван');
-  const user2 = new User('Марія');
-
-  channel.subscribe(user1);
-  channel.subscribe(user2);
-
-  channel.uploadVideo('Як вивчити TypeScript за 10 хвилин');
-}
+// Twitch
+const twitch = new TwitchChannel();
+twitch.subscribe(ivan);
+twitch.subscribe(oleg);
+twitch.startStream('Розбираємо патерни проєктування LIVE');
