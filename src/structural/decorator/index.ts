@@ -60,3 +60,5 @@ export function demoDecorator() {
   coffee = new SugarDecorator(coffee);
   console.log(`${coffee.getDescription()} = ${coffee.getCost()} грн`);
 }
+
+demoDecorator();

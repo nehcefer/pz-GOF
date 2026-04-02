@@ -6,7 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/examples/run-all.ts",
-    "build": "tsc",
+    "decorator":     "ts-node src/structural/decorator/index.ts",
+    "adapter":       "ts-node src/structural/adapter/index.ts",
+    "observer":      "ts-node src/behavioral/observer/index.ts",
+    "strategy":      "ts-node src/behavioral/strategy/index.ts",
+    "builder":       "ts-node src/creational/builder/index.ts",
+    "factory-method":"ts-node src/creational/factory-method/index.ts",
     "dev": "ts-node"
   },
   "repository": {
